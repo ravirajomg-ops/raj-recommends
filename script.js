@@ -1,37 +1,86 @@
 /* ==========================================
-   RAJ Recommends
-   Premium Landing Page
-   script.js
+   RAJ Recommends v1
 ========================================== */
 
-window.addEventListener("DOMContentLoaded", () => {
-
-const loader=document.getElementById("loader");
+document.addEventListener("DOMContentLoaded", () => {
 
     /* ==========================
        ELEMENTS
     ========================== */
 
+    const loader = document.getElementById("loader");
     const poster = document.querySelector(".poster");
     const reflection = document.querySelector(".reflection");
-    const glow = document.querySelector(".cursor-glow");
+    const cursorGlow = document.querySelector(".cursor-glow");
     const cards = document.querySelectorAll(".card");
     const qr = document.querySelector(".qr");
 
     /* ==========================
-       FLOATING POSTER
+       LOADER
     ========================== */
 
-    let angle = 0;
+    window.addEventListener("load", () => {
+
+        setTimeout(() => {
+
+            loader.style.opacity = "0";
+            loader.style.visibility = "hidden";
+
+        }, 1800);
+
+    });
+
+    /* ==========================
+       CURSOR GLOW
+    ========================== */
+
+    document.addEventListener("mousemove", (e) => {
+
+        cursorGlow.style.left = e.clientX + "px";
+        cursorGlow.style.top = e.clientY + "px";
+
+    });
+
+    /* ==========================
+       POSTER 3D
+    ========================== */
+
     let mouseX = 0;
     let mouseY = 0;
+    let angle = 0;
 
-    function animatePoster(){
+    poster.addEventListener("mousemove", (e) => {
+
+        const rect = poster.getBoundingClientRect();
+
+        mouseX =
+            ((e.clientX - rect.left) / rect.width - 0.5) * 18;
+
+        mouseY =
+            ((e.clientY - rect.top) / rect.height - 0.5) * -18;
+
+        reflection.style.left =
+            (e.clientX - rect.left - 90) + "px";
+
+        reflection.style.top =
+            (e.clientY - rect.top - 90) + "px";
+
+    });
+
+    poster.addEventListener("mouseleave", () => {
+
+        mouseX = 0;
+        mouseY = 0;
+
+    });
+
+    function animatePoster() {
 
         angle += 0.02;
 
         const floatY = Math.sin(angle) * 10;
-        const rotateZ = Math.sin(angle) * 1.2;
+
+        const rotateZ = Math.sin(angle) * 1.5;
 
         poster.style.transform = `
         translateY(${floatY}px)
@@ -47,93 +96,65 @@ const loader=document.getElementById("loader");
     animatePoster();
 
     /* ==========================
-       POSTER PARALLAX
-    ========================== */
-
-    poster.addEventListener("mousemove",(e)=>{
-
-        const rect = poster.getBoundingClientRect();
-
-        mouseX = ((e.clientX-rect.left)/rect.width-.5)*15;
-
-        mouseY = ((e.clientY-rect.top)/rect.height-.5)*-15;
-
-        reflection.style.left =
-        (e.clientX-rect.left-90)+"px";
-
-        reflection.style.top =
-        (e.clientY-rect.top-90)+"px";
-
-    });
-
-    poster.addEventListener("mouseleave",()=>{
-
-        mouseX = 0;
-        mouseY = 0;
-
-    });
-
-    /* ==========================
-       CURSOR GLOW
-    ========================== */
-
-    document.addEventListener("mousemove",(e)=>{
-
-        glow.style.left=e.clientX+"px";
-
-        glow.style.top=e.clientY+"px";
-
-    });
-
-    /* ==========================
        QR PULSE
     ========================== */
 
     let scale = 1;
+    let direction = 0.0015;
 
-    let dir = 0.002;
+    function qrAnimation() {
 
-    function animateQR(){
+        scale += direction;
 
-        scale += dir;
+        if (scale >= 1.05)
+            direction = -0.0015;
 
-        if(scale>1.05) dir=-0.002;
+        if (scale <= 1)
+            direction = 0.0015;
 
-        if(scale<1) dir=0.002;
+        qr.style.transform =
+            `scale(${scale})`;
 
-        qr.style.transform=`scale(${scale})`;
-
-        requestAnimationFrame(animateQR);
+        requestAnimationFrame(qrAnimation);
 
     }
 
-    animateQR();
+    qrAnimation();
 
     /* ==========================
        SCROLL REVEAL
     ========================== */
 
-    const observer = new IntersectionObserver((entries)=>{
+    const observer = new IntersectionObserver((entries) => {
 
-        entries.forEach(entry=>{
+        entries.forEach(entry => {
 
-            if(entry.isIntersecting){
+            if (entry.isIntersecting) {
 
-                entry.target.classList.add("show");
+                entry.target.style.opacity = "1";
+
+                entry.target.style.transform =
+                    "translateY(0px)";
 
             }
 
         });
 
-    },{
+    }, {
 
-        threshold:.15
+        threshold: 0.2
 
     });
 
-    cards.forEach(card=>{
+    cards.forEach(card => {
 
-        card.classList.add("fade-up");
+        card.style.opacity = "0";
+
+        card.style.transform =
+            "translateY(60px)";
+
+        card.style.transition =
+            ".8s ease";
 
         observer.observe(card);
 
@@ -143,54 +164,44 @@ const loader=document.getElementById("loader");
        HEADER SHADOW
     ========================== */
 
-    const header = document.querySelector("header");
+    const header =
+        document.querySelector("header");
 
-    window.addEventListener("scroll",()=>{
+    window.addEventListener("scroll", () => {
 
-        if(window.scrollY>30){
+        if (window.scrollY > 30) {
 
-            header.style.boxShadow=
-            "0 15px 40px rgba(0,0,0,.12)";
+            header.style.boxShadow =
+                "0 20px 60px rgba(0,0,0,.12)";
 
-        }else{
+        } else {
 
-            header.style.boxShadow=
-            "0 10px 30px rgba(0,0,0,.08)";
+            header.style.boxShadow =
+                "0 18px 40px rgba(0,0,0,.08)";
 
         }
 
     });
 
     /* ==========================
-       BUTTON RIPPLE
+       BUTTON CLICK
     ========================== */
 
-    document.querySelectorAll("a").forEach(btn=>{
+    document.querySelectorAll("a").forEach(btn => {
 
-        btn.addEventListener("click",()=>{
+        btn.addEventListener("click", () => {
 
-            btn.style.transform="scale(.96)";
+            btn.style.transform =
+                "scale(.97)";
 
-            setTimeout(()=>{
+            setTimeout(() => {
 
-                btn.style.transform="";
+                btn.style.transform = "";
 
-            },120);
+            }, 120);
 
         });
 
     });
-
-});
-
-window.addEventListener("load",()=>{
-
-setTimeout(()=>{
-
-loader.style.opacity="0";
-
-loader.style.visibility="hidden";
-
-},2200);
 
 });

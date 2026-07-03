@@ -27,16 +27,24 @@ window.addEventListener("load", () => {
 
 const poster = document.querySelector(".poster");
 
-let floating = 0;
+let angle = 0;
 
-setInterval(() => {
+function animatePoster() {
 
-    floating += 0.03;
+    angle += 0.02;
+
+    const y = Math.sin(angle) * 10;
+
+    const rotate = Math.sin(angle) * 1.5;
 
     poster.style.transform =
-        `translateY(${Math.sin(floating)*10}px)`;
+        `translateY(${y}px) rotate(${rotate}deg)`;
 
-},16);
+    requestAnimationFrame(animatePoster);
+
+}
+
+animatePoster();
 
 // ------------------------------
 // Mouse Parallax (Desktop)

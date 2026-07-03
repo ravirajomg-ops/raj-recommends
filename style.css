@@ -278,11 +278,12 @@ transition:.5s;
 .poster:hover{
 
 transform:
-translateY(-10px)
-scale(1.02);
+translateY(-12px)
+scale(1.03);
 
 box-shadow:
-0 40px 100px rgba(37,211,102,.25);
+
+0 40px 100px rgba(37,211,102,.35);
 
 }
 
@@ -597,6 +598,116 @@ animation:gradientMove 6s linear infinite;
 100%{
 
 background-position:300%;
+
+}
+
+}
+
+/* ===========================
+   Floating Particles
+=========================== */
+
+.particle{
+
+position:absolute;
+
+border-radius:50%;
+
+background:rgba(37,211,102,.18);
+
+backdrop-filter:blur(10px);
+
+animation:particleMove 12s linear infinite;
+
+}
+
+.p1{
+width:90px;
+height:90px;
+left:5%;
+top:10%;
+animation-duration:15s;
+}
+
+.p2{
+width:40px;
+height:40px;
+left:75%;
+top:15%;
+animation-duration:10s;
+}
+
+.p3{
+width:60px;
+height:60px;
+left:20%;
+bottom:15%;
+animation-duration:18s;
+}
+
+.p4{
+width:120px;
+height:120px;
+right:10%;
+bottom:5%;
+animation-duration:20s;
+}
+
+.p5{
+width:25px;
+height:25px;
+left:45%;
+top:25%;
+animation-duration:8s;
+}
+
+.p6{
+width:70px;
+height:70px;
+right:35%;
+top:65%;
+animation-duration:16s;
+}
+
+@keyframes particleMove{
+
+0%{
+
+transform:
+translateY(0px)
+translateX(0px);
+
+}
+
+25%{
+
+transform:
+translateY(-30px)
+translateX(20px);
+
+}
+
+50%{
+
+transform:
+translateY(-60px)
+translateX(-15px);
+
+}
+
+75%{
+
+transform:
+translateY(-20px)
+translateX(30px);
+
+}
+
+100%{
+
+transform:
+translateY(0px)
+translateX(0px);
 
 }
 

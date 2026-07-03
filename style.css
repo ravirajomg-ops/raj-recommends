@@ -1070,3 +1070,313 @@ font-size:16px;
 line-height:1.8;
 
 }
+
+/* ======================================
+   PART 4 - RESPONSIVE + FINAL POLISH
+====================================== */
+
+/* ---------- Smooth Selection ---------- */
+
+::selection{
+    background:#25D366;
+    color:#fff;
+}
+
+/* ---------- Images ---------- */
+
+img{
+    max-width:100%;
+    user-select:none;
+    -webkit-user-drag:none;
+}
+
+/* ---------- Links ---------- */
+
+a{
+    -webkit-tap-highlight-color:transparent;
+}
+
+/* ---------- Smooth Animation ---------- */
+
+*{
+    transition:
+        background-color .3s ease,
+        color .3s ease,
+        box-shadow .3s ease;
+}
+
+/* ---------- Scrollbar ---------- */
+
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-track{
+    background:#f3f3f3;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#25D366;
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#1EBE5D;
+}
+
+/* ---------- Tablet ---------- */
+
+@media (max-width:1100px){
+
+.hero{
+
+flex-direction:column;
+
+text-align:center;
+
+padding-top:160px;
+
+}
+
+.left{
+
+order:2;
+
+}
+
+.right{
+
+order:1;
+
+}
+
+.left p{
+
+margin:auto;
+
+}
+
+.buttons{
+
+justify-content:center;
+
+}
+
+.poster{
+
+width:340px;
+
+}
+
+nav{
+
+display:none;
+
+}
+
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width:768px){
+
+header{
+
+width:95%;
+
+padding:14px 18px;
+
+border-radius:16px;
+
+}
+
+.logo{
+
+font-size:22px;
+
+}
+
+.join-btn{
+
+padding:12px 18px;
+
+font-size:15px;
+
+}
+
+.hero{
+
+padding:140px 20px 60px;
+
+gap:50px;
+
+}
+
+.left h1{
+
+font-size:46px;
+
+}
+
+.left p{
+
+font-size:18px;
+
+}
+
+.poster{
+
+width:280px;
+
+}
+
+.features{
+
+padding:80px 20px;
+
+}
+
+.features h2{
+
+font-size:38px;
+
+}
+
+.cards{
+
+grid-template-columns:1fr;
+
+}
+
+.join{
+
+padding:90px 20px;
+
+}
+
+.join h2{
+
+font-size:38px;
+
+}
+
+.qr{
+
+width:180px;
+
+}
+
+.join-big{
+
+font-size:18px;
+
+padding:16px 28px;
+
+}
+
+footer{
+
+padding:40px 20px;
+
+}
+
+}
+
+/* ---------- Small Phones ---------- */
+
+@media (max-width:480px){
+
+.left h1{
+
+font-size:38px;
+
+}
+
+.badge{
+
+font-size:13px;
+
+}
+
+.poster{
+
+width:240px;
+
+}
+
+.logo{
+
+font-size:20px;
+
+}
+
+.join-btn{
+
+padding:10px 16px;
+
+font-size:14px;
+
+}
+
+.primary-btn,
+.secondary-btn{
+
+width:100%;
+
+}
+
+.buttons{
+
+flex-direction:column;
+
+}
+
+}
+
+/* ---------- Fade In ---------- */
+
+.fade-up{
+
+opacity:0;
+
+transform:translateY(40px);
+
+transition:1s;
+
+}
+
+.fade-up.show{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+/* ---------- Final Polish ---------- */
+
+body{
+
+animation:pageLoad .8s ease;
+
+}
+
+@keyframes pageLoad{
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}

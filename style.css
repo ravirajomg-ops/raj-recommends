@@ -711,3 +711,31 @@ translateX(0px);
 }
 
 }
+
+/* Reflection */
+
+.reflection{
+
+position:absolute;
+
+width:180px;
+height:180px;
+
+border-radius:50%;
+
+background:rgba(255,255,255,.25);
+
+filter:blur(40px);
+
+pointer-events:none;
+
+left:-200px;
+top:-200px;
+
+z-index:8;
+
+mix-blend-mode:screen;
+
+transition:.05s linear;
+
+}

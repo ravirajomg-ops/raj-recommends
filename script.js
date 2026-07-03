@@ -37,8 +37,12 @@ function animatePoster() {
 
     const rotate = Math.sin(angle) * 1.5;
 
-    poster.style.transform =
-        `translateY(${y}px) rotate(${rotate}deg)`;
+    poster.style.transform = `
+translateY(${y}px)
+rotate(${rotate}deg)
+rotateX(${mouseY}deg)
+rotateY(${mouseX}deg)
+`;
 
     requestAnimationFrame(animatePoster);
 

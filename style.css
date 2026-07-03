@@ -264,15 +264,14 @@ border-radius:50px;
 =========================== */
 
 .poster{
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: .2s ease-out;
 
-position:relative;
-
-overflow:hidden;
-
-cursor:pointer;
-
-transition:.5s;
-
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    will-change: transform;
 }
 
 .poster:hover{

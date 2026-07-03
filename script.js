@@ -27,6 +27,9 @@ window.addEventListener("load", () => {
 
 const poster = document.querySelector(".poster");
 
+let mouseX = 0;
+let mouseY = 0;
+
 let angle = 0;
 
 function animatePoster() {
@@ -53,8 +56,6 @@ animatePoster();
 // ===============================
 // Premium 3D Poster
 // ===============================
-
-const poster = document.querySelector(".poster");
 
 poster.addEventListener("mousemove", (e) => {
 

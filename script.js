@@ -1,219 +1,182 @@
 /* ==========================================
-   RAJ Recommends - script.js
+   RAJ Recommends
+   Premium Landing Page
+   script.js
 ========================================== */
 
-// Wait until page loads
-window.addEventListener("load", () => {
+window.addEventListener("DOMContentLoaded", () => {
 
-    document.body.classList.add("loaded");
+    /* ==========================
+       ELEMENTS
+    ========================== */
 
-    // Hero animation
-    const hero = document.querySelector(".hero");
+    const poster = document.querySelector(".poster");
+    const reflection = document.querySelector(".reflection");
+    const glow = document.querySelector(".cursor-glow");
+    const cards = document.querySelectorAll(".card");
+    const qr = document.querySelector(".qr");
 
-    hero.style.opacity = "0";
-    hero.style.transform = "translateY(40px)";
+    /* ==========================
+       FLOATING POSTER
+    ========================== */
 
-    setTimeout(() => {
-        hero.style.transition = "all 1s ease";
-        hero.style.opacity = "1";
-        hero.style.transform = "translateY(0)";
-    }, 200);
+    let angle = 0;
+    let mouseX = 0;
+    let mouseY = 0;
 
-});
+    function animatePoster(){
 
-// ------------------------------
-// Floating Poster
-// ------------------------------
+        angle += 0.02;
 
-const poster = document.querySelector(".poster");
+        const floatY = Math.sin(angle) * 10;
+        const rotateZ = Math.sin(angle) * 1.2;
 
-let mouseX = 0;
-let mouseY = 0;
+        poster.style.transform = `
+        translateY(${floatY}px)
+        rotateX(${mouseY}deg)
+        rotateY(${mouseX}deg)
+        rotateZ(${rotateZ}deg)
+        `;
 
-let angle = 0;
+        requestAnimationFrame(animatePoster);
 
-function animatePoster() {
+    }
 
-    angle += 0.02;
+    animatePoster();
 
-    const y = Math.sin(angle) * 10;
+    /* ==========================
+       POSTER PARALLAX
+    ========================== */
 
-    const rotate = Math.sin(angle) * 1.5;
+    poster.addEventListener("mousemove",(e)=>{
 
-    poster.style.transform = `
-translateY(${y}px)
-rotate(${rotate}deg)
-rotateX(${mouseY}deg)
-rotateY(${mouseX}deg)
-`;
+        const rect = poster.getBoundingClientRect();
 
-    requestAnimationFrame(animatePoster);
+        mouseX = ((e.clientX-rect.left)/rect.width-.5)*15;
 
-}
+        mouseY = ((e.clientY-rect.top)/rect.height-.5)*-15;
 
-animatePoster();
+        reflection.style.left =
+        (e.clientX-rect.left-90)+"px";
 
-// ===============================
-// Premium 3D Poster
-// ===============================
+        reflection.style.top =
+        (e.clientY-rect.top-90)+"px";
 
-poster.addEventListener("mousemove",(e)=>{
+    });
 
-const rect=poster.getBoundingClientRect();
+    poster.addEventListener("mouseleave",()=>{
 
-mouseX=((e.clientX-rect.left)/rect.width-.5)*15;
+        mouseX = 0;
+        mouseY = 0;
 
-mouseY=((e.clientY-rect.top)/rect.height-.5)*-15;
+    });
 
-});
+    /* ==========================
+       CURSOR GLOW
+    ========================== */
 
-poster.addEventListener("mouseleave",()=>{
+    document.addEventListener("mousemove",(e)=>{
 
-mouseX=0;
+        glow.style.left=e.clientX+"px";
 
-mouseY=0;
+        glow.style.top=e.clientY+"px";
 
-});
+    });
 
-// ------------------------------
-// Reveal Animation
-// ------------------------------
+    /* ==========================
+       QR PULSE
+    ========================== */
 
-const cards=document.querySelectorAll(".card");
+    let scale = 1;
 
-const observer=new IntersectionObserver((entries)=>{
+    let dir = 0.002;
 
-entries.forEach(entry=>{
+    function animateQR(){
 
-if(entry.isIntersecting){
+        scale += dir;
 
-entry.target.style.opacity="1";
+        if(scale>1.05) dir=-0.002;
 
-entry.target.style.transform="translateY(0)";
+        if(scale<1) dir=0.002;
 
-}
+        qr.style.transform=`scale(${scale})`;
 
-});
+        requestAnimationFrame(animateQR);
 
-},{threshold:.2});
+    }
 
-cards.forEach(card=>{
+    animateQR();
 
-card.style.opacity="0";
+    /* ==========================
+       SCROLL REVEAL
+    ========================== */
 
-card.style.transform="translateY(40px)";
+    const observer = new IntersectionObserver((entries)=>{
 
-card.style.transition=".7s";
+        entries.forEach(entry=>{
 
-observer.observe(card);
+            if(entry.isIntersecting){
 
-});
+                entry.target.classList.add("show");
 
-// ------------------------------
-// Button Click Animation
-// ------------------------------
+            }
 
-const buttons=document.querySelectorAll("a");
+        });
 
-buttons.forEach(btn=>{
+    },{
 
-btn.addEventListener("click",()=>{
+        threshold:.15
 
-btn.style.transform="scale(.95)";
+    });
 
-setTimeout(()=>{
+    cards.forEach(card=>{
 
-btn.style.transform="";
+        card.classList.add("fade-up");
 
-},150);
+        observer.observe(card);
 
-});
+    });
 
-});
+    /* ==========================
+       HEADER SHADOW
+    ========================== */
 
-// ------------------------------
-// QR Pulse
-// ------------------------------
+    const header = document.querySelector("header");
 
-const qr=document.querySelector(".qr");
+    window.addEventListener("scroll",()=>{
 
-let pulse=1;
+        if(window.scrollY>30){
 
-let direction=.003;
+            header.style.boxShadow=
+            "0 15px 40px rgba(0,0,0,.12)";
 
-setInterval(()=>{
+        }else{
 
-pulse+=direction;
+            header.style.boxShadow=
+            "0 10px 30px rgba(0,0,0,.08)";
 
-if(pulse>=1.05) direction=-.003;
+        }
 
-if(pulse<=1) direction=.003;
+    });
 
-qr.style.transform=`scale(${pulse})`;
+    /* ==========================
+       BUTTON RIPPLE
+    ========================== */
 
-},16);
+    document.querySelectorAll("a").forEach(btn=>{
 
-// ------------------------------
-// Header Shadow on Scroll
-// ------------------------------
+        btn.addEventListener("click",()=>{
 
-const header=document.querySelector("header");
+            btn.style.transform="scale(.96)";
 
-window.addEventListener("scroll",()=>{
+            setTimeout(()=>{
 
-if(window.scrollY>20){
+                btn.style.transform="";
 
-header.style.boxShadow=
-"0 8px 30px rgba(0,0,0,.08)";
+            },120);
 
-}else{
+        });
 
-header.style.boxShadow="none";
-
-}
-
-});
-
-// ------------------------------
-// Smooth Scroll
-// ------------------------------
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
-
-anchor.addEventListener("click",function(e){
-
-e.preventDefault();
-
-const target=document.querySelector(
-
-this.getAttribute("href")
-
-);
-
-target.scrollIntoView({
-
-behavior:"smooth"
-
-});
-
-});
-
-});
-
-console.log("✅ RAJ Recommends Loaded");
-
-// Reflection
-
-const reflection = document.querySelector(".reflection");
-
-poster.addEventListener("mousemove",(e)=>{
-
-const rect = poster.getBoundingClientRect();
-
-reflection.style.left =
-(e.clientX-rect.left-90)+"px";
-
-reflection.style.top =
-(e.clientY-rect.top-90)+"px";
+    });
 
 });

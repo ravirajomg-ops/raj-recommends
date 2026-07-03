@@ -6,6 +6,8 @@
 
 window.addEventListener("DOMContentLoaded", () => {
 
+const loader=document.getElementById("loader");
+
     /* ==========================
        ELEMENTS
     ========================== */
@@ -178,5 +180,17 @@ window.addEventListener("DOMContentLoaded", () => {
         });
 
     });
+
+});
+
+window.addEventListener("load",()=>{
+
+setTimeout(()=>{
+
+loader.style.opacity="0";
+
+loader.style.visibility="hidden";
+
+},2200);
 
 });

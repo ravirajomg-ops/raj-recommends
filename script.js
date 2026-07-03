@@ -75,12 +75,6 @@ mouseY=0;
 
 });
 
-poster.addEventListener("mouseenter", () => {
-
-    poster.style.transition = ".15s";
-
-});
-
 // ------------------------------
 // Reveal Animation
 // ------------------------------

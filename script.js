@@ -47,21 +47,16 @@ function animatePoster() {
 animatePoster();
 
 // ------------------------------
-// Mouse Parallax (Desktop)
+// Premium Mouse Parallax
 // ------------------------------
 
-document.addEventListener("mousemove",(e)=>{
+let mouseX = 0;
+let mouseY = 0;
 
-    const x =
-    (e.clientX/window.innerWidth-.5)*12;
+document.addEventListener("mousemove", (e) => {
 
-    const y =
-    (e.clientY/window.innerHeight-.5)*12;
-
-    poster.style.transform=
-    `rotateY(${x}deg)
-     rotateX(${-y}deg)
-     translateY(${Math.sin(floating)*10}px)`;
+    mouseX = (e.clientX / window.innerWidth - 0.5) * 20;
+    mouseY = (e.clientY / window.innerHeight - 0.5) * -20;
 
 });
 

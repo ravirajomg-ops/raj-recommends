@@ -201,3 +201,19 @@ behavior:"smooth"
 });
 
 console.log("✅ RAJ Recommends Loaded");
+
+// Reflection
+
+const reflection = document.querySelector(".reflection");
+
+poster.addEventListener("mousemove",(e)=>{
+
+const rect = poster.getBoundingClientRect();
+
+reflection.style.left =
+(e.clientX-rect.left-90)+"px";
+
+reflection.style.top =
+(e.clientY-rect.top-90)+"px";
+
+});

@@ -50,17 +50,42 @@ rotateY(${mouseX}deg)
 
 animatePoster();
 
-// ------------------------------
-// Premium Mouse Parallax
-// ------------------------------
+// ===============================
+// Premium 3D Poster
+// ===============================
 
-let mouseX = 0;
-let mouseY = 0;
+const poster = document.querySelector(".poster");
 
-document.addEventListener("mousemove", (e) => {
+poster.addEventListener("mousemove", (e) => {
 
-    mouseX = (e.clientX / window.innerWidth - 0.5) * 20;
-    mouseY = (e.clientY / window.innerHeight - 0.5) * -20;
+    const rect = poster.getBoundingClientRect();
+
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const rotateY = ((x / rect.width) - 0.5) * 18;
+    const rotateX = ((y / rect.height) - 0.5) * -18;
+
+    poster.style.transform =
+        `perspective(1000px)
+         rotateX(${rotateX}deg)
+         rotateY(${rotateY}deg)
+         scale(1.03)`;
+
+});
+
+poster.addEventListener("mouseleave", () => {
+
+    poster.style.transition = ".5s";
+
+    poster.style.transform =
+        "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)";
+
+});
+
+poster.addEventListener("mouseenter", () => {
+
+    poster.style.transition = ".15s";
 
 });
 

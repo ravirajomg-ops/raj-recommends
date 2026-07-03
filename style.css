@@ -1,0 +1,211 @@
+/* ===================================
+   RAJ Recommends - Premium Landing Page
+=================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#f7faf9;
+    color:#111;
+    overflow-x:hidden;
+}
+
+/* ---------- Background ---------- */
+
+.background{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+
+    background:
+    radial-gradient(circle at top left,#25D36633,transparent 40%),
+    radial-gradient(circle at bottom right,#00c85322,transparent 40%),
+    linear-gradient(135deg,#ffffff,#eef8f2);
+
+    animation:bgMove 10s ease-in-out infinite alternate;
+}
+
+@keyframes bgMove{
+
+0%{
+transform:scale(1);
+}
+
+100%{
+transform:scale(1.08);
+}
+
+}
+
+/* ---------- Header ---------- */
+
+header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:20px 8%;
+
+position:sticky;
+
+top:0;
+
+backdrop-filter:blur(20px);
+
+background:rgba(255,255,255,.65);
+
+z-index:100;
+
+}
+
+.logo{
+
+font-size:30px;
+
+font-weight:800;
+
+}
+
+.join-btn{
+
+background:#25D366;
+
+color:white;
+
+padding:14px 28px;
+
+border-radius:50px;
+
+text-decoration:none;
+
+font-weight:700;
+
+transition:.3s;
+
+}
+
+.join-btn:hover{
+
+transform:translateY(-3px);
+
+box-shadow:0 10px 25px rgba(37,211,102,.4);
+
+}
+
+/* ---------- Hero ---------- */
+
+.hero{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:80px 8%;
+
+gap:50px;
+
+min-height:90vh;
+
+}
+
+.left{
+
+flex:1;
+
+}
+
+.badge{
+
+display:inline-block;
+
+padding:10px 18px;
+
+background:#dff8e9;
+
+border-radius:30px;
+
+margin-bottom:20px;
+
+font-weight:700;
+
+color:#128C7E;
+
+}
+
+.left h1{
+
+font-size:62px;
+
+line-height:1.05;
+
+margin-bottom:25px;
+
+}
+
+.left p{
+
+font-size:22px;
+
+line-height:1.8;
+
+color:#555;
+
+}
+
+.buttons{
+
+margin-top:35px;
+
+display:flex;
+
+gap:15px;
+
+flex-wrap:wrap;
+
+}
+
+.btn-primary{
+
+background:#25D366;
+
+color:white;
+
+padding:16px 30px;
+
+border-radius:50px;
+
+text-decoration:none;
+
+font-weight:700;
+
+transition:.3s;
+
+}
+
+.btn-primary:hover{
+
+transform:translateY(-4px);
+
+box-shadow:0 12px 30px rgba(37,211,102,.45);
+
+}
+
+.btn-secondary{
+
+padding:16px 30px;
+
+border-radius:50px;

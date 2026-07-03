@@ -57,21 +57,13 @@ animatePoster();
 // Premium 3D Poster
 // ===============================
 
-poster.addEventListener("mousemove", (e) => {
+poster.addEventListener("mousemove",(e)=>{
 
-    const rect = poster.getBoundingClientRect();
+const rect=poster.getBoundingClientRect();
 
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+mouseX=((e.clientX-rect.left)/rect.width-.5)*15;
 
-    const rotateY = ((x / rect.width) - 0.5) * 18;
-    const rotateX = ((y / rect.height) - 0.5) * -18;
-
-    poster.style.transform =
-        `perspective(1000px)
-         rotateX(${rotateX}deg)
-         rotateY(${rotateY}deg)
-         scale(1.03)`;
+mouseY=((e.clientY-rect.top)/rect.height-.5)*-15;
 
 });
 

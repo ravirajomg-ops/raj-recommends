@@ -67,12 +67,11 @@ mouseY=((e.clientY-rect.top)/rect.height-.5)*-15;
 
 });
 
-poster.addEventListener("mouseleave", () => {
+poster.addEventListener("mouseleave",()=>{
 
-    poster.style.transition = ".5s";
+mouseX=0;
 
-    poster.style.transform =
-        "perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)";
+mouseY=0;
 
 });
 
